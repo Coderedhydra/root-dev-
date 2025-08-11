@@ -32,23 +32,23 @@ theme:
   # logo: assets/logo.png
   # favicon: assets/logo.png
 repo_name: Root Dev
-repo_url: https://github.com/stackblitz-labs/bolt.diy
+repo_url: https://github.com/Coderedhydra/root-dev-
 edit_uri: ''
 
 extra:
   generator: false
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/stackblitz-labs/bolt.diy
+      link: https://github.com/Coderedhydra/root-dev-
       name: Root Dev
     - icon: fontawesome/brands/discourse
       link: https://thinktank.ottomator.ai/
       name: Root Dev Discourse
     - icon: fontawesome/brands/x-twitter
-      link: https://x.com/bolt_diy
+      link: https://x.com/root_dev
       name: Root Dev on X
     - icon: fontawesome/brands/bluesky
-      link: https://bsky.app/profile/bolt.diy
+      link: https://bsky.app/profile/root.dev
       name: Root Dev on Bluesky
 
 markdown_extensions:
