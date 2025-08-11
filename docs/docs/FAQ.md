@@ -2,8 +2,8 @@
 
 ## Models and Setup
 
-??? question "What are the best models for bolt.diy?"
-For the best experience with bolt.diy, we recommend using the following models:
+??? question "What are the best models for Root Dev?"
+For the best experience with Root Dev, we recommend using the following models:
 
     - **Claude 3.5 Sonnet (old)**: Best overall coder, providing excellent results across all use cases
     - **Gemini 2.0 Flash**: Exceptional speed while maintaining good performance
@@ -17,14 +17,14 @@ For the best experience with bolt.diy, we recommend using the following models:
 
 ## Best Practices
 
-??? question "How do I get the best results with bolt.diy?" - **Be specific about your stack**:  
- Mention the frameworks or libraries you want to use (e.g., Astro, Tailwind, ShadCN) in your initial prompt. This ensures that bolt.diy scaffolds the project according to your preferences.
+??? question "How do I get the best results with Root Dev?" - **Be specific about your stack**:  
+ Mention the frameworks or libraries you want to use (e.g., Astro, Tailwind, ShadCN) in your initial prompt. This ensures that Root Dev scaffolds the project according to your preferences.
 
     - **Use the enhance prompt icon**:
       Before sending your prompt, click the *enhance* icon to let the AI refine your prompt. You can edit the suggested improvements before submitting.
 
     - **Scaffold the basics first, then add features**:
-      Ensure the foundational structure of your application is in place before introducing advanced functionality. This helps bolt.diy establish a solid base to build on.
+      Ensure the foundational structure of your application is in place before introducing advanced functionality. This helps Root Dev establish a solid base to build on.
 
     - **Batch simple instructions**:
       Combine simple tasks into a single prompt to save time and reduce API credit consumption. For example:
@@ -32,10 +32,10 @@ For the best experience with bolt.diy, we recommend using the following models:
 
 ## Project Information
 
-??? question "How do I contribute to bolt.diy?"
+??? question "How do I contribute to Root Dev?"
 Check out our [Contribution Guide](CONTRIBUTING.md) for more details on how to get involved!
 
-??? question "What are the future plans for bolt.diy?"
+??? question "What are the future plans for Root Dev?"
 Visit our [Roadmap](https://roadmap.sh/r/ottodev-roadmap-2ovzo) for the latest updates.  
  New features and improvements are on the way!
 
@@ -46,7 +46,7 @@ bolt.diy began as a small showcase project on @ColeMedin's YouTube channel to ex
 
 ## Model Comparisons
 
-??? question "How do local LLMs compare to larger models like Claude 3.5 Sonnet for bolt.diy?"
+??? question "How do local LLMs compare to larger models like Claude 3.5 Sonnet for Root Dev?"
 While local LLMs are improving rapidly, larger models like GPT-4o, Claude 3.5 Sonnet, and DeepSeek Coder V2 236b still offer the best results for complex applications. Our ongoing focus is to improve prompts, agents, and the platform to better support smaller local LLMs.
 
 ## Troubleshooting
@@ -88,7 +88,7 @@ You will need to make sure you have the latest version of Visual Studio C++ inst
 ## Get Help & Support
 
 !!! tip "Community Support"
-[Join the bolt.diy Community](https://thinktank.ottomator.ai/c/bolt-diy/17){target=\_blank} for discussions and help
+[Join the Root Dev Community](https://thinktank.ottomator.ai/c/bolt-diy/17){target=\_blank} for discussions and help
 
 !!! bug "Report Issues"
 [Open an Issue](https://github.com/stackblitz-labs/bolt.diy/issues/19){target=\_blank} in our GitHub Repository
