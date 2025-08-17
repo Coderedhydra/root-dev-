@@ -256,6 +256,9 @@ export function LockManager() {
         <div>
           {filteredAndSortedItems.length} item(s) • {selectedItems.size} selected
         </div>
+        <div className="text-[10px]">
+          Made by <a href="mailto:amitjaiswal044@gmail.com" className="underline hover:text-bolt-elements-item-contentAccent">Amit Jaiswal</a>
+        </div>
       </div>
     </div>
   );

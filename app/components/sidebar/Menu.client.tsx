@@ -524,6 +524,9 @@ export const Menu = () => {
               </Dialog>
             </DialogRoot>
           </div>
+          <div className="px-4 py-2 text-[10px] text-bolt-elements-textTertiary">
+            Made by <a href="mailto:amitjaiswal044@gmail.com" className="underline hover:text-bolt-elements-item-contentAccent">Amit Jaiswal</a>
+          </div>
           <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 px-4 py-3">
             <SettingsButton onClick={handleSettingsClick} />
             <ThemeSwitch />
