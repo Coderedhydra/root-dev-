@@ -87,10 +87,10 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="rotate(-45)"
           >
-            <stop offset="0%" stopColor="#b44aff" stopOpacity="0%"></stop>
-            <stop offset="40%" stopColor="#b44aff" stopOpacity="80%"></stop>
-            <stop offset="50%" stopColor="#b44aff" stopOpacity="80%"></stop>
-            <stop offset="100%" stopColor="#b44aff" stopOpacity="0%"></stop>
+            <stop offset="0%" stopColor="#22C55E" stopOpacity="0%"></stop>
+            <stop offset="40%" stopColor="#22C55E" stopOpacity="80%"></stop>
+            <stop offset="50%" stopColor="#22C55E" stopOpacity="80%"></stop>
+            <stop offset="100%" stopColor="#22C55E" stopOpacity="0%"></stop>
           </linearGradient>
           <linearGradient id="shine-gradient">
             <stop offset="0%" stopColor="white" stopOpacity="0%"></stop>
@@ -277,7 +277,7 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
               {props.enhancingPrompt ? (
                 <div className="i-svg-spinners:90-ring-with-bg text-bolt-elements-loader-progress text-xl animate-spin"></div>
               ) : (
-                <div className="i-bolt:stars text-xl"></div>
+                <div className="i-ph:sparkle text-xl"></div>
               )}
             </IconButton>
 

@@ -33,6 +33,12 @@ import { ChatBox } from './ChatBox';
 import type { DesignScheme } from '~/types/design-scheme';
 import type { ElementInfo } from '~/components/workbench/Inspector';
 import LlmErrorAlert from './LLMApiAlert';
+import { HeaderActionButtons } from '~/components/header/HeaderActionButtons.client';
+import { motion } from 'framer-motion';
+import useViewport from '~/lib/hooks';
+import { workbenchStore } from '~/lib/stores/workbench';
+import { ThemeSwitch } from '~/components/ui/ThemeSwitch';
+import { ControlPanel } from '~/components/@settings/core/ControlPanel';
 
 const TEXTAREA_MIN_HEIGHT = 76;
 
@@ -144,6 +150,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
     const [progressAnnotations, setProgressAnnotations] = useState<ProgressAnnotation[]>([]);
     const expoUrl = useStore(expoUrlAtom);
     const [qrModalOpen, setQrModalOpen] = useState(false);
+    const isSmallViewport = useViewport(1024);
+    const showWorkbench = useStore(workbenchStore.showWorkbench);
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
     useEffect(() => {
       if (expoUrl) {
@@ -347,7 +356,11 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
       >
         <ClientOnly>{() => <Menu />}</ClientOnly>
         <div className="flex flex-col lg:flex-row overflow-y-auto w-full h-full">
-          <div className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}>
+          <motion.div
+            animate={isSmallViewport && showWorkbench ? { scale: 0.98, opacity: 0.6 } : { scale: 1, opacity: 1 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className={classNames(styles.Chat, 'flex flex-col flex-grow lg:min-w-[var(--chat-min-width)] h-full')}
+          >
             {!chatStarted && (
               <div id="intro" className="mt-[16vh] max-w-2xl mx-auto text-center px-4 lg:px-0">
                 <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
@@ -365,29 +378,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               resize="smooth"
               initial="smooth"
             >
-              <StickToBottom.Content className="flex flex-col gap-4 relative ">
-                <ClientOnly>
-                  {() => {
-                    return chatStarted ? (
-                      <Messages
-                        className="flex flex-col w-full flex-1 max-w-chat pb-4 mx-auto z-1"
-                        messages={messages}
-                        isStreaming={isStreaming}
-                        append={append}
-                        chatMode={chatMode}
-                        setChatMode={setChatMode}
-                        provider={provider}
-                        model={model}
-                        addToolResult={addToolResult}
-                      />
-                    ) : null;
-                  }}
-                </ClientOnly>
-                <ScrollToBottom />
-              </StickToBottom.Content>
               <div
-                className={classNames('my-auto flex flex-col gap-2 w-full max-w-chat mx-auto z-prompt mb-6', {
-                  'sticky bottom-2': chatStarted,
+                className={classNames('my-auto flex flex-col gap-2 w-full max-w-chat mx-auto z-prompt', {
+                  'sticky top-2': chatStarted,
                 })}
               >
                 <div className="flex flex-col gap-2">
@@ -467,7 +460,33 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   setSelectedElement={setSelectedElement}
                 />
               </div>
+              <StickToBottom.Content className="flex flex-col gap-4 relative ">
+                <ClientOnly>
+                  {() => {
+                    return chatStarted ? (
+                      <Messages
+                        className="flex flex-col w-full flex-1 max-w-chat pt-20 pb-4 mx-auto z-1"
+                        messages={messages}
+                        isStreaming={isStreaming}
+                        append={append}
+                        chatMode={chatMode}
+                        setChatMode={setChatMode}
+                        provider={provider}
+                        model={model}
+                        addToolResult={addToolResult}
+                      />
+                    ) : null;
+                  }}
+                </ClientOnly>
+                <ScrollToBottom />
+              </StickToBottom.Content>
             </StickToBottom>
+            {/* Bottom toolbar for actions */}
+            <div className="sticky bottom-0 w-full bg-bolt-elements-background-depth-1/80 backdrop-blur border-t border-bolt-elements-borderColor py-2">
+              <div className="max-w-chat mx-auto flex items-center justify-end px-2">
+                <HeaderActionButtons chatStarted={chatStarted} />
+              </div>
+            </div>
             <div className="flex flex-col justify-center">
               {!chatStarted && (
                 <div className="flex justify-center gap-2">
@@ -488,7 +507,42 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 {!chatStarted && <StarterTemplates />}
               </div>
             </div>
-          </div>
+            {/* Small-screen bottom nav */}
+            {isSmallViewport && (
+              <div className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50">
+                <div className="flex items-center gap-3 px-3 py-2 rounded-full border border-bolt-elements-borderColor bg-bolt-elements-background-depth-2 shadow-sm">
+                  <button
+                    className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-bolt-elements-background-depth-3"
+                    title="Chat"
+                    onClick={() => {
+                      workbenchStore.showWorkbench.set(false);
+                    }}
+                  >
+                    <div className="i-ph:chat-circle-text text-lg" />
+                  </button>
+                  <button
+                    className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-bolt-elements-background-depth-3"
+                    title="Workbench"
+                    onClick={() => {
+                      workbenchStore.showWorkbench.set(true);
+                    }}
+                  >
+                    <div className="i-ph:code text-lg" />
+                  </button>
+                  <button
+                    className="w-9 h-9 rounded-full flex items-center justify-center hover:bg-bolt-elements-background-depth-3"
+                    title="Settings"
+                    onClick={() => setIsSettingsOpen(true)}
+                  >
+                    <div className="i-ph:gear-six text-lg" />
+                  </button>
+                  <div className="w-[1px] h-6 bg-bolt-elements-dividerColor" />
+                  <ThemeSwitch />
+                </div>
+              </div>
+            )}
+            <ControlPanel open={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+          </motion.div>
           <ClientOnly>
             {() => (
               <Workbench chatStarted={chatStarted} isStreaming={isStreaming} setSelectedElement={setSelectedElement} />
