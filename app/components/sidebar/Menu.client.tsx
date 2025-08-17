@@ -19,7 +19,7 @@ const menuVariants = {
   closed: {
     opacity: 0,
     visibility: 'hidden',
-    left: '-340px',
+    bottom: '-260px',
     transition: {
       duration: 0.2,
       ease: cubicEasingFn,
@@ -28,7 +28,7 @@ const menuVariants = {
   open: {
     opacity: 1,
     visibility: 'initial',
-    left: 0,
+    bottom: 0,
     transition: {
       duration: 0.2,
       ease: cubicEasingFn,
@@ -279,27 +279,25 @@ export const Menu = () => {
   }, [open, selectionMode]);
 
   useEffect(() => {
-    const enterThreshold = 20;
-    const exitThreshold = 20;
+    function handleProximity(event: MouseEvent) {
+      const enterThreshold = 24;
+      const exitThreshold = 24;
 
-    function onMouseMove(event: MouseEvent) {
-      if (isSettingsOpen) {
-        return;
-      }
-
-      if (event.pageX < enterThreshold) {
+      const viewportHeight = window.innerHeight;
+      const distanceFromBottom = viewportHeight - event.clientY;
+      if (distanceFromBottom < enterThreshold) {
         setOpen(true);
       }
 
-      if (menuRef.current && event.clientX > menuRef.current.getBoundingClientRect().right + exitThreshold) {
+      if (menuRef.current && event.clientY < viewportHeight - menuRef.current.getBoundingClientRect().height - exitThreshold) {
         setOpen(false);
       }
     }
 
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', handleProximity);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mousemove', handleProximity);
     };
   }, [isSettingsOpen]);
 
@@ -326,15 +324,13 @@ export const Menu = () => {
     <>
       <motion.div
         ref={menuRef}
-        initial="closed"
-        animate={open ? 'open' : 'closed'}
         variants={menuVariants}
-        style={{ width: '340px' }}
+        animate={open ? 'open' : 'closed'}
+        style={{ height: '260px', zIndex: 1040 }}
         className={classNames(
-          'flex selection-accent flex-col side-menu fixed top-0 h-full rounded-r-2xl',
-          'bg-white dark:bg-gray-950 border-r border-bolt-elements-borderColor',
+          'flex selection-accent flex-col side-menu fixed left-0 right-0 rounded-t-2xl',
+          'bg-white dark:bg-gray-950 border-t border-bolt-elements-borderColor',
           'shadow-sm text-sm',
-          isSettingsOpen ? 'z-40' : 'z-sidebar',
         )}
       >
         <div className="h-12 flex items-center justify-between px-4 border-b border-gray-100 dark:border-gray-800/50 bg-gray-50/50 dark:bg-gray-900/50 rounded-tr-2xl">

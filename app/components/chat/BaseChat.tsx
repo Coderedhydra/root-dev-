@@ -33,6 +33,7 @@ import { ChatBox } from './ChatBox';
 import type { DesignScheme } from '~/types/design-scheme';
 import type { ElementInfo } from '~/components/workbench/Inspector';
 import LlmErrorAlert from './LLMApiAlert';
+import { HeaderActionButtons } from '~/components/header/HeaderActionButtons.client';
 
 const TEXTAREA_MIN_HEIGHT = 76;
 
@@ -365,29 +366,9 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
               resize="smooth"
               initial="smooth"
             >
-              <StickToBottom.Content className="flex flex-col gap-4 relative ">
-                <ClientOnly>
-                  {() => {
-                    return chatStarted ? (
-                      <Messages
-                        className="flex flex-col w-full flex-1 max-w-chat pb-4 mx-auto z-1"
-                        messages={messages}
-                        isStreaming={isStreaming}
-                        append={append}
-                        chatMode={chatMode}
-                        setChatMode={setChatMode}
-                        provider={provider}
-                        model={model}
-                        addToolResult={addToolResult}
-                      />
-                    ) : null;
-                  }}
-                </ClientOnly>
-                <ScrollToBottom />
-              </StickToBottom.Content>
               <div
-                className={classNames('my-auto flex flex-col gap-2 w-full max-w-chat mx-auto z-prompt mb-6', {
-                  'sticky bottom-2': chatStarted,
+                className={classNames('my-auto flex flex-col gap-2 w-full max-w-chat mx-auto z-prompt', {
+                  'sticky top-2': chatStarted,
                 })}
               >
                 <div className="flex flex-col gap-2">
@@ -467,7 +448,33 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                   setSelectedElement={setSelectedElement}
                 />
               </div>
+              <StickToBottom.Content className="flex flex-col gap-4 relative ">
+                <ClientOnly>
+                  {() => {
+                    return chatStarted ? (
+                      <Messages
+                        className="flex flex-col w-full flex-1 max-w-chat pt-20 pb-4 mx-auto z-1"
+                        messages={messages}
+                        isStreaming={isStreaming}
+                        append={append}
+                        chatMode={chatMode}
+                        setChatMode={setChatMode}
+                        provider={provider}
+                        model={model}
+                        addToolResult={addToolResult}
+                      />
+                    ) : null;
+                  }}
+                </ClientOnly>
+                <ScrollToBottom />
+              </StickToBottom.Content>
             </StickToBottom>
+            {/* Bottom toolbar for actions */}
+            <div className="sticky bottom-0 w-full bg-bolt-elements-background-depth-1/80 backdrop-blur border-t border-bolt-elements-borderColor py-2">
+              <div className="max-w-chat mx-auto flex items-center justify-end px-2">
+                <HeaderActionButtons chatStarted={chatStarted} />
+              </div>
+            </div>
             <div className="flex flex-col justify-center">
               {!chatStarted && (
                 <div className="flex justify-center gap-2">
