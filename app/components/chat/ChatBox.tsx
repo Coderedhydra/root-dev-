@@ -87,10 +87,10 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="rotate(-45)"
           >
-            <stop offset="0%" stopColor="#b44aff" stopOpacity="0%"></stop>
-            <stop offset="40%" stopColor="#b44aff" stopOpacity="80%"></stop>
-            <stop offset="50%" stopColor="#b44aff" stopOpacity="80%"></stop>
-            <stop offset="100%" stopColor="#b44aff" stopOpacity="0%"></stop>
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0%"></stop>
+            <stop offset="40%" stopColor="#22c55e" stopOpacity="80%"></stop>
+            <stop offset="50%" stopColor="#22c55e" stopOpacity="80%"></stop>
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0%"></stop>
           </linearGradient>
           <linearGradient id="shine-gradient">
             <stop offset="0%" stopColor="white" stopOpacity="0%"></stop>
@@ -178,11 +178,11 @@ export const ChatBox: React.FC<ChatBoxProps> = (props) => {
           )}
           onDragEnter={(e) => {
             e.preventDefault();
-            e.currentTarget.style.border = '2px solid #1488fc';
+            e.currentTarget.style.border = '2px solid #22c55e';
           }}
           onDragOver={(e) => {
             e.preventDefault();
-            e.currentTarget.style.border = '2px solid #1488fc';
+            e.currentTarget.style.border = '2px solid #22c55e';
           }}
           onDragLeave={(e) => {
             e.preventDefault();
